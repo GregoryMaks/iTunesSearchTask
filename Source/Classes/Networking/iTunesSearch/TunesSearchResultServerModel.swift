@@ -12,13 +12,13 @@ import Foundation
 struct TunesSearchResultServerModel: RawDataInitializable {
     
     let trackName: String
-    let collectionName: String
+    let collectionName: String?
     let artistName: String
     let kind: String
-    let trackPrice: Decimal
+    let trackPrice: Double
     let currency: String
     let releaseDate: Date
-    let artwork100URL: URL
+    let artworkURL100: URL
     
     /// - Throws: ParsingError
     ///
@@ -27,14 +27,14 @@ struct TunesSearchResultServerModel: RawDataInitializable {
         let dataNode = rawData
 
         trackName = try dataNode.validatedValue(forKey: "trackName")
-        collectionName = try dataNode.validatedValue(forKey: "collectionName")
+        collectionName = try dataNode.validatedOptionalValue(forKey: "collectionName")
         artistName = try dataNode.validatedValue(forKey: "artistName")
         kind = try dataNode.validatedValue(forKey: "kind")
         trackPrice = try dataNode.validatedValue(forKey: "trackPrice")
         currency = try dataNode.validatedValue(forKey: "currency")
         releaseDate = Date()
 //        releaseDate = try dataNode.validatedValue(forKey: "releaseDate", converter: Date.init(timeIntervalSince1970:))
-        artwork100URL = try dataNode.validatedValue(forKey: "artwork100URL")
+        artworkURL100 = try dataNode.validatedValue(forKey: "artworkUrl100")
     }
     
 }

@@ -52,7 +52,7 @@ class TunesSearchResultCell: UITableViewCell, NibLoadableView, Reusable {
     // MARK: - Public methods
     
     func startLoadingImage(imageLoadingService: ImageLoadingServiceProtocol) {
-        guard let imageUrl = model?.artwork100URL, failedToLoadImageOnce == false else {
+        guard let imageUrl = model?.artworkURL100, failedToLoadImageOnce == false else {
             return
         }
         

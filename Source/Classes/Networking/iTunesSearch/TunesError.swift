@@ -24,4 +24,12 @@ enum TunesError: Error, Descriptable {
             return "Parsing error: \(parsingError.stringDescription)"
         }
     }
+    
+    var isSilent: Bool {
+        if case .networkError(let networkError) = self, case .cancelled = networkError {
+            return true
+        }
+        
+        return false
+    }
 }

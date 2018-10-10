@@ -12,11 +12,9 @@ import Foundation
 class TunesSearchResponseBuilder<ServerModel: RawDataInitializable> {
     
     private let data: Data
-//    private let offset: Int
     
-    init(data: Data/*, offset: Int*/) {
+    init(data: Data) {
         self.data = data
-//        self.offset = offset
     }
     
     func buildResponse() -> Result<TunesSearchResponse<ServerModel>, ParsingError> {
@@ -25,12 +23,10 @@ class TunesSearchResponseBuilder<ServerModel: RawDataInitializable> {
             guard let rootDictionary = rootObject as? [String: Any] else {
                 throw ParsingError.wrongType(key: "root")
             }
+              
+            let dataNodesArray: [[String: Any]] = try rootDictionary.validatedValue(forKey: "results")
             
-            let dataNode: [String: Any] = try rootDictionary.validatedValue(forKey: "data")
-            
-            return .success(.init(models: try serverModels(from: dataNode)))
-//                                  pagingMarker: try pagingMarker(from: dataNode)))
-        
+            return .success(.init(models: try serverModels(from: dataNodesArray)))
         } catch let error as ParsingError {
             return .failure(error)
         } catch {
@@ -40,13 +36,8 @@ class TunesSearchResponseBuilder<ServerModel: RawDataInitializable> {
     
     // MARK: - Private methods
     
-    private func serverModels(from dataNode: [String: Any]) throws -> [ServerModel] {
-        let children: [[String: Any]] = try dataNode.validatedValue(forKey: "children")
-        return try children.map { try ServerModel(rawData: $0) }
+    private func serverModels(from dataNodes: [[String: Any]]) throws -> [ServerModel] {
+        return try dataNodes.map { try ServerModel(rawData: $0) }
     }
-    
-//    private func pagingMarker() throws -> TunesSearchPagingMarker? {
-//        return TunesSearchPagingMarker(offset: offset)
-//    }
     
 }

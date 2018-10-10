@@ -9,6 +9,7 @@
 import Foundation
 
 
+// TODO: remove?
 struct TunesSearchPagingMarker {
     
     /// Parameter to use when next page should be loaded, can be empty string

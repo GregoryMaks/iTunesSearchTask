@@ -15,7 +15,8 @@ protocol TunesSearchServiceProtocol {
         queryParams: [String: String],
         offset: Int,
         limit: Int,
-        completion: @escaping (Result<TunesSearchResponse<TunesSearchResultServerModel>, TunesError>) -> Void)
+        completion: @escaping (Result<TunesSearchResponse<TunesSearchResultServerModel>, TunesError>) -> Void
+    ) -> CancellableObject
     
 }
 
@@ -25,7 +26,7 @@ class TunesSearchService: TunesSearchServiceProtocol {
     // MARK: - Subtypes
     
     private struct Constants {
-        static let apiUrl = URL(string: "https://Tunes.apple.com")!
+        static let apiUrl = URL(string: "https://itunes.apple.com")!
         
         static var searchAbsoluteURL: URL {
             return URL(string: "search", relativeTo: apiUrl)!
@@ -48,7 +49,8 @@ class TunesSearchService: TunesSearchServiceProtocol {
         queryParams: [String: String],
         offset: Int,
         limit: Int,
-        completion: @escaping (Result<TunesSearchResponse<TunesSearchResultServerModel>, TunesError>) -> Void)
+        completion: @escaping (Result<TunesSearchResponse<TunesSearchResultServerModel>, TunesError>) -> Void
+    ) -> CancellableObject
     {
         var queryItems: [URLQueryItem] = queryParams.map { URLQueryItem(name: $0.key, value: $0.value) }
         queryItems.append(URLQueryItem(name: "offset", value: "\(offset)"))
@@ -57,7 +59,7 @@ class TunesSearchService: TunesSearchServiceProtocol {
         let url = Constants.searchAbsoluteURL.urlWith(queryItems: queryItems)!
         
         let request = URLRequest(url: url)
-        networkService.perform(request: request) { [weak self] result in
+        return networkService.perform(request: request) { [weak self] result in
             guard let `self` = self else { return }
             self.queue.async {
                 completion(

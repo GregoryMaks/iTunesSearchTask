@@ -52,8 +52,6 @@ class TunesSearchViewController: UITableViewController {
         self.searchController = tempSearchController
         
         definesPresentationContext = true;
-        
-        viewModel.dataSource.loadData()
     }
     
     // MARK: - Public methods
@@ -66,7 +64,7 @@ class TunesSearchViewController: UITableViewController {
     // MARK: - Actions
     
     @objc private func pullToRefresh(_ sender: UIRefreshControl) {
-        viewModel.dataSource.loadData()
+        viewModel.onQueryChange(withNewText: searchController?.searchBar.text ?? "")
     }
     
     // MARK: - Private methods
@@ -195,7 +193,9 @@ extension TunesSearchViewController: TunesSearchDataSourceDelegate {
     func dataSource(_ dataSource: TunesSearchDataSource, didFinishWithError error: TunesError) {
         refreshControl?.endRefreshing()
         refreshControl?.isHidden = true
-        showErrorAlert(message: error.stringDescription)
+        if !error.isSilent {
+            showErrorAlert(message: error.stringDescription)
+        }
     }
     
 }

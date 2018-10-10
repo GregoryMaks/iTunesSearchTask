@@ -33,6 +33,8 @@ class TunesSearchDataSource {
     private let iTunesSearchService: TunesSearchService
     private var isLoading = false
     private var loadedItemCount = 0
+    private var latestSearchQuery: SearchQuery?
+    private var cancellableRequestObject: CancellableObject?
     
     // MARK: - Public properties
     
@@ -48,24 +50,40 @@ class TunesSearchDataSource {
     
     // MARK: - Public methods
     
-    func loadData() {
-        loadDataChunk(loadingType: .fullReload)
+    func loadData(withSearchText text: String) {
+        let query = SearchQuery(text: text)
+        latestSearchQuery = query
+        loadDataChunk(loadingType: .fullReload, withSearchQuery: query)
     }
     
     func loadMoreData() {
-        loadDataChunk(loadingType: .loadMore)
+        guard let query = latestSearchQuery else { return }
+        loadDataChunk(loadingType: .loadMore, withSearchQuery: query)
+    }
+    
+    func shouldReloadData(for searchText: String) -> Bool {
+        return latestSearchQuery?.text != searchText
+    }
+    
+    func cancelLoadingData() {
+        cancellableRequestObject?.cancel()
+        cancellableRequestObject = nil
+        latestSearchQuery = nil
+        isLoading = false
+        loadedItemCount = 0
     }
     
     // MARK: - Private methods
     
-    private func loadDataChunk(loadingType: LoadingType) {
+    private func loadDataChunk(loadingType: LoadingType, withSearchQuery query: SearchQuery) {
         guard !isLoading else { return }
+        guard query.isValid else { return }
         
         let requestOffset = loadedItemCount
         
         isLoading = true
-        iTunesSearchService.requestSearchResults(
-            queryParams: ["media": "movie", "term": "Jack", "country": "US"],
+        cancellableRequestObject = iTunesSearchService.requestSearchResults(
+            queryParams: ["media": "movie", "term": query.text, "country": "US"],
             offset: requestOffset,
             limit: Constants.defaultLimit)
         { [weak self] result in
@@ -83,6 +101,8 @@ class TunesSearchDataSource {
                 self.isLoading = false
                 self.delegate?.dataSource(self, didFinishWithError: error)
             }
+            
+            self.cancellableRequestObject = nil
         }
     }
     

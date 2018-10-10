@@ -16,6 +16,8 @@
 		932D91412168D57E005A4D16 /* ImageLoadingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932D91402168D57E005A4D16 /* ImageLoadingService.swift */; };
 		9364FE942168F5B700971BCA /* TunesError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9364FE932168F5B700971BCA /* TunesError.swift */; };
 		9364FE96216900DC00971BCA /* String+QueryParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9364FE95216900DC00971BCA /* String+QueryParameters.swift */; };
+		9383EC1F216E7B9800F36EB1 /* SearchQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9383EC1E216E7B9800F36EB1 /* SearchQuery.swift */; };
+		9383EC21216E7F3300F36EB1 /* CancellableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9383EC20216E7F3300F36EB1 /* CancellableObject.swift */; };
 		93CF2EB21F423DF300E90876 /* LoadMoreFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93CF2EB11F423DF300E90876 /* LoadMoreFooterView.xib */; };
 		93CF2EB41F423EFC00E90876 /* LoadMoreFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CF2EB31F423EFC00E90876 /* LoadMoreFooterView.swift */; };
 		93CF2EB61F42D67D00E90876 /* TunesSearchPagingMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CF2EB51F42D67D00E90876 /* TunesSearchPagingMarker.swift */; };
@@ -52,6 +54,8 @@
 		932D91402168D57E005A4D16 /* ImageLoadingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLoadingService.swift; sourceTree = "<group>"; };
 		9364FE932168F5B700971BCA /* TunesError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TunesError.swift; sourceTree = "<group>"; };
 		9364FE95216900DC00971BCA /* String+QueryParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+QueryParameters.swift"; sourceTree = "<group>"; };
+		9383EC1E216E7B9800F36EB1 /* SearchQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchQuery.swift; sourceTree = "<group>"; };
+		9383EC20216E7F3300F36EB1 /* CancellableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancellableObject.swift; sourceTree = "<group>"; };
 		93CF2EB11F423DF300E90876 /* LoadMoreFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadMoreFooterView.xib; sourceTree = "<group>"; };
 		93CF2EB31F423EFC00E90876 /* LoadMoreFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadMoreFooterView.swift; sourceTree = "<group>"; };
 		93CF2EB51F42D67D00E90876 /* TunesSearchPagingMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TunesSearchPagingMarker.swift; sourceTree = "<group>"; };
@@ -119,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				93E962601F40BD23002018C6 /* iTunesSearchDataSource.swift */,
+				9383EC1E216E7B9800F36EB1 /* SearchQuery.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -127,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				93E9626B1F40DF9F002018C6 /* AuthorDateFormatter.swift */,
+				9383EC20216E7F3300F36EB1 /* CancellableObject.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -322,6 +328,7 @@
 				93EB19631F4CAACE00FAA8C0 /* Descriptable.swift in Sources */,
 				9327D3BB1F3F8AE500DEADC6 /* TunesSearchResponse.swift in Sources */,
 				9327D3BD1F40526500DEADC6 /* TunesSearchResponseBuilder.swift in Sources */,
+				9383EC21216E7F3300F36EB1 /* CancellableObject.swift in Sources */,
 				9364FE942168F5B700971BCA /* TunesError.swift in Sources */,
 				932D91412168D57E005A4D16 /* ImageLoadingService.swift in Sources */,
 				93E962651F40BF1E002018C6 /* TunesSearchViewModel.swift in Sources */,
@@ -330,6 +337,7 @@
 				93CF2EB61F42D67D00E90876 /* TunesSearchPagingMarker.swift in Sources */,
 				9364FE96216900DC00971BCA /* String+QueryParameters.swift in Sources */,
 				E6EAD4151F3738BF0007EC65 /* FunctionalComposition.swift in Sources */,
+				9383EC1F216E7B9800F36EB1 /* SearchQuery.swift in Sources */,
 				E682D4601F387A7B00767C0C /* ApplicationCoordinator.swift in Sources */,
 				93EB195F1F4C5D8800FAA8C0 /* URL+Extensions.swift in Sources */,
 				93EB195E1F4C5D8800FAA8C0 /* Reusable.swift in Sources */,

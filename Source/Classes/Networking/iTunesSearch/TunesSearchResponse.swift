@@ -16,6 +16,5 @@ struct TunesSearchResponse<ServerModel: RawDataInitializable> {
     }
     
     let models: [ServerModel]
-//    let pagingMarker: TunesSearchPagingMarker?
     
 }

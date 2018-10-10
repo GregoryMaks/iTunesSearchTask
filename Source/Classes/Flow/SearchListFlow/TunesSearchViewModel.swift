@@ -53,6 +53,13 @@ class TunesSearchViewModel: NSObject {
         return .failure(.unableToOpenUrl)
     }
     
+    func onQueryChange(withNewText text: String) {
+        guard dataSource.shouldReloadData(for: text) else { return }
+        
+        dataSource.cancelLoadingData()
+        dataSource.loadData(withSearchText: text)
+    }
+    
 }
 
 extension TunesSearchViewModel: UISearchResultsUpdating {
@@ -60,8 +67,7 @@ extension TunesSearchViewModel: UISearchResultsUpdating {
     public func updateSearchResults(for searchController: UISearchController) {
         guard let searchText = searchController.searchBar.text else { return }
         
-        print("Search term: \(searchText)")
-        // TODO
+        onQueryChange(withNewText: searchText)
     }
     
 }
