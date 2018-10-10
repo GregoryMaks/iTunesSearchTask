@@ -2,7 +2,11 @@
 
 ## Main functionality
 
-???
+Search iTunes titles using text query
+
+## State
+
+WIP, search is not working correctly for now
 
 ## Details
 
